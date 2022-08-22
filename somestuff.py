@@ -1,4 +1,4 @@
 
 
-def myfunc():
+def myfunc(number):
     pass
