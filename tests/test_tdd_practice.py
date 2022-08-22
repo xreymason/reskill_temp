@@ -11,24 +11,24 @@ def test_passed_number():
 
 
 def test_list_with_no_runs():
-    assert find3(['a','a','v','b']) == []
+    assert find3(['a','a','v','b']) == ()
 
 
 def test_list_with_single_run():
-    assert find3([2,1,1,1,2,3,3]) == [1]
+    assert find3([2,1,1,1,2,3,3]) == (1,)
 
 
 def test_list_with_multiple_runs():
-    assert find3([1,2,2,2,3,3,3,4]) == [1,4]
+    assert find3([1,2,2,2,3,3,3,4]) == (1,4)
 
 
 def test_list_with_intertwined_runs():
-    assert find3([1,3,3,3,3]) == [1,2]
+    assert find3([1,3,3,3,3]) == (1,2)
 
 
 def test_passed_string():
-    assert find3('aaacccbs') == [0,3]
+    assert find3('aaacccbs') == (0,3)
 
 
 def test_wrapping_run():
-    assert find3([1,1,2,3,4,5,1]) == [-1]
+    assert find3([1,1,2,3,4,5,1]) == (-1,)
