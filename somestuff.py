@@ -1,4 +1,5 @@
 
 
 def myfunc(number):
-    pass
+    if number:
+        return 'something'
