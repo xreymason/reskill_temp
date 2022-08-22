@@ -1,5 +1,5 @@
 
 
 def myfunc(number):
-    if number:
-        return 'something'
+    value = 'something' if number else None
+    return value
