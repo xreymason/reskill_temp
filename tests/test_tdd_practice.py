@@ -10,8 +10,26 @@ def test_passed_number():
         find3(5)
 
 
+def test_passed_dict():
+    with pytest.raises(TypeError):
+        find3({'a':1,'b':1,'c':1,'d':1})
+
+
+def test_passed_set():
+    with pytest.raises(TypeError):
+        find3(set([1,1,1,2,3,3,3]))
+
+
+def test_passed_tuple():
+    assert find3((1,1,1,2,3,3,1)) == (0,-1)
+
+
+def test_passed_string():
+    assert find3('aaacccbs') == (0,3)
+
+
 def test_list_with_no_runs():
-    assert find3(['a','a','v','b']) == ()
+    assert find3(list('aavb')) == ()
 
 
 def test_list_with_single_run():
@@ -24,10 +42,6 @@ def test_list_with_multiple_runs():
 
 def test_list_with_intertwined_runs():
     assert find3([1,3,3,3,3]) == (1,2)
-
-
-def test_passed_string():
-    assert find3('aaacccbs') == (0,3)
 
 
 def test_wrapping_run():
