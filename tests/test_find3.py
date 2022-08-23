@@ -1,8 +1,9 @@
-import sys, os
-parent_dir = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(parent_dir)
-from tdd_practice import find3
+# import sys, os
+# parent_dir = os.path.dirname(os.path.dirname(__file__))
+# sys.path.append(parent_dir)
+# from tdd_practice import find3
 
+from ..tdd_practice import find3
 import pytest
 
 

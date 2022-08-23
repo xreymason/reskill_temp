@@ -31,5 +31,29 @@ def find3(indexable:Iterable) -> tuple:
             indicies.append(i)
     return tuple(indicies)
 
-def summer():
-    pass
+
+def summer(numbers:list,num_to_sum_to:int) -> list:
+    """Finds all combinations of numbers passed that 
+    will sum to a certain number
+
+    :param numbers: numbers to go through
+    :type numbers: list
+    :param num_to_sum_to: number to try to search for sums for
+    :type num_to_sum_to: int/float
+    :return: combinations of numbers that sum to desired value
+    :rtype: list
+    """
+    from itertools import combinations
+    
+    all_combos = []
+    for combo_length in range(len(numbers)):
+        if combo_length == 0:
+            continue
+        for combo in combinations(numbers, combo_length):
+            if sum(combo) == num_to_sum_to:
+                all_combos.append(tuple(combo))
+    return all_combos
+
+# if __name__ == "__main__":
+#     print(summer([1,2,4,5], 3))
+#     print(summer([1,2,3,4,5],6))
