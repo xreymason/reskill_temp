@@ -30,3 +30,6 @@ def find3(indexable:Iterable) -> tuple:
         elif ([v]*3) == indexable[i:i+3]:
             indicies.append(i)
     return tuple(indicies)
+
+def summer():
+    pass
