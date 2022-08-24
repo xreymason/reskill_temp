@@ -11,6 +11,14 @@ Process each operation by index
     [2] -> [2,3] -> [5] -> [5,2] -> [2.5]
     (2+3)/2
 """
+from operator import add, sub, mul, truediv
+
+operators = {
+    '+': add,
+    '-': sub,
+    '*': mul,
+    '/': truediv
+}
 
 
 def correct_symbol_to_number_ratio(rpn_list:list) -> bool:
@@ -66,21 +74,13 @@ def process_math_operation(symbol:str, a:float, b:float) -> float:
     :return: the calculated total
     :rtype: float
     """
-    from operator import add, sub, mul, truediv
-
     arg_testing = {'a':a,'b':b}
     for k in arg_testing:
         if type(arg_testing[k]) not in (int, float):
             raise TypeError(f"Argument {k}: not of type int or float")
     total = a
-    if symbol == '+':
-        total = add(a, b)
-    elif symbol == '-':
-        total = sub(a, b)
-    elif symbol == '*':
-        total = mul(a, b)
-    elif symbol == '/':
-        total = truediv(a, b)
+    if symbol in operators:
+        total = operators[symbol](a, b)
     else:
         raise ValueError("""%s is an invalid character,
     use the help function for valid characters.
@@ -109,5 +109,5 @@ if __name__ == "__main__":
     inp = '2 3 + 2 /'#should equal 1; (2+3)/5
     inp = '2 3 + 6 2 - /'
     # inp = '9 4 3 6 + *'
-    inp = '+ 9 4 3 -'
+    # inp = '+ 9 4 3 -'
     print(Execute_RPN_Calculation(inp, debug=True))
