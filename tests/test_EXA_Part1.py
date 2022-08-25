@@ -33,5 +33,4 @@ def test_EB_passed_too_many_args_to_any_operations():
 def test_EB_passed_invalid_action():
     bot = ExaBot()
     with pytest.raises(ValueError):
-        # bot.process_command(ExaCommand("SUPER 4 5 T").command_structure())
         bot.process_command(ExaCommand("SUPER 4 5 T"))
