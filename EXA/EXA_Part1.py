@@ -1,14 +1,16 @@
-"""EXA Bot Object
+"""EXA Command Structure
+* A simple means of storing and converting commands into a usable form
+- I'm thinking a class object that:
+    * Stores the command as a string
+    * Can convert the string into a perferred tuple format
+    * Allows the user to modify the command as needed in parts
+        > Action
+        > Arguments
+
+EXA Bot Object:
 R = Register(Value)
 N = Number
 Needs-
-    * A simple means of storing and converting commands into a usable form
-        - I'm thinking a class object that:
-            * Stores the command as a string
-            * Can convert the string into a perferred tuple format
-            * Allows the user to modify the command as needed in parts
-                > Action
-                > Arguments
     * Registers X and T to store numbers
     * Register F to store ?Files? (Put placeholder for now)
     - Methods to place values into a Register:
