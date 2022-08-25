@@ -66,6 +66,8 @@ class ExaCommand:
         for i, value in enumerate(tmp):
             if value.strip('-').isdigit():
                 tmp[i] = int(value)
+            elif value.isalpha():
+                pass
             elif len(value) != 1:
                 raise ValueError("invalid value: %s"%(value))
         return tmp
@@ -349,7 +351,7 @@ class ExaBot:
         with open(file_path, 'r') as file:
             for line in file:
                 line = line.strip()
-                if len(line.split()) > 2:
+                if len(line.split()) > 1:
                     commands.append(ExaCommand(line))
         return commands
 
