@@ -142,6 +142,128 @@ class ExaBot:
         print()
 
 
+    # def _copy(self, value:int, target:str):
+    #     """Performs a Copy operation on the value
+    #     then stores it in the target register
+
+    #     :param value: a number
+    #     :type value: int
+    #     :param target: a register to store result in
+    #     :type target: str
+    #     :raises ValueError: When target isn't a defined register
+    #     """
+    #     if self.is_register(target):
+    #         setattr(self, target, value)
+    #     else:
+    #         raise ValueError(RegisterError%str(target))
+
+
+    # def _addi(self, value:int, value2:int, target:str):
+    #     """Performs a Addition operation on the values
+    #     then stores the result in the target register
+
+    #     :param value: a number
+    #     :type value: int
+    #     :param value2: a number
+    #     :type value2: int
+    #     :param target: a register to store result in
+    #     :type target: str
+    #     :raises ValueError: When target isn't a defined register
+    #     """
+    #     if self.is_register(target):
+    #         setattr(self, target, value+value2)
+    #     else:
+    #         raise ValueError(RegisterError%str(target))
+
+
+    # def _subi(self, value:int, value2:int, target:str):
+    #     """Performs a Subtraction operation on the values
+    #     then stores the result in the target register
+
+    #     :param value: a number
+    #     :type value: int
+    #     :param value2: a number
+    #     :type value2: int
+    #     :param target: a register to store result in
+    #     :type target: str
+    #     :raises ValueError: When target isn't a defined register
+    #     """
+    #     if self.is_register(target):
+    #         setattr(self, target, value-value2)
+    #     else:
+    #         raise ValueError(RegisterError%str(target))
+    
+
+    # def _muli(self, value:int, value2:int, target:str):
+    #     """Performs a Multiplication operation on the values
+    #     then stores the result in the target register
+
+    #     :param value: a number
+    #     :type value: int
+    #     :param value2: a number
+    #     :type value2: int
+    #     :param target: a register to store result in
+    #     :type target: str
+    #     :raises ValueError: When target isn't a defined register
+    #     """
+    #     if self.is_register(target):
+    #         setattr(self, target, value*value2)
+    #     else:
+    #         raise ValueError(RegisterError%str(target))
+    
+
+    # def _divi(self, value:int, value2:int, target:str):
+    #     """Performs a Floor Division operation on the values
+    #     then stores the result in the target register
+
+    #     :param value: a number
+    #     :type value: int
+    #     :param value2: a number
+    #     :type value2: int
+    #     :param target: a register to store result in
+    #     :type target: str
+    #     :raises ValueError: When target isn't a defined register
+    #     """
+    #     if self.is_register(target):
+    #         setattr(self, target, value//value2)
+    #     else:
+    #         raise ValueError(RegisterError%str(target))
+    
+
+    # def _modi(self, value:int, value2:int, target:str):
+    #     """Performs a Modulus operation on the values
+    #     then stores the result in the target register
+
+    #     :param value: a number
+    #     :type value: int
+    #     :param value2: a number
+    #     :type value2: int
+    #     :param target: a register to store result in
+    #     :type target: str
+    #     :raises ValueError: When target isn't a defined register
+    #     """
+    #     if self.is_register(target):
+    #         setattr(self, target, value%value2)
+    #     else:
+    #         raise ValueError(RegisterError%str(target))
+
+
+    # New Format
+    def get_value(self, reg_or_num) -> int:
+        """Either gets a value from a register
+
+        :param reg_or_num: _description_
+        :type reg_or_num: _type_
+        :return: _description_
+        :rtype: int
+        """
+        if self.is_register(reg_or_num):
+            value = self.get_register_value(reg_or_num)
+        else:
+            value = reg_or_num
+        return value
+
+
     def _copy(self, value:int, target:str):
         """Performs a Copy operation on the value
         then stores it in the target register
@@ -153,7 +275,7 @@ class ExaBot:
         :raises ValueError: When target isn't a defined register
         """
         if self.is_register(target):
-            setattr(self, target, value)
+            setattr(self, target, self.get_value(value))
         else:
             raise ValueError(RegisterError%str(target))
 
@@ -171,6 +293,8 @@ class ExaBot:
         :raises ValueError: When target isn't a defined register
         """
         if self.is_register(target):
+            value = self.get_value(value)
+            value2 = self.get_value(value2)
             setattr(self, target, value+value2)
         else:
             raise ValueError(RegisterError%str(target))
@@ -189,6 +313,8 @@ class ExaBot:
         :raises ValueError: When target isn't a defined register
         """
         if self.is_register(target):
+            value = self.get_value(value)
+            value2 = self.get_value(value2)
             setattr(self, target, value-value2)
         else:
             raise ValueError(RegisterError%str(target))
@@ -207,6 +333,8 @@ class ExaBot:
         :raises ValueError: When target isn't a defined register
         """
         if self.is_register(target):
+            value = self.get_value(value)
+            value2 = self.get_value(value2)
             setattr(self, target, value*value2)
         else:
             raise ValueError(RegisterError%str(target))
@@ -225,6 +353,8 @@ class ExaBot:
         :raises ValueError: When target isn't a defined register
         """
         if self.is_register(target):
+            value = self.get_value(value)
+            value2 = self.get_value(value2)
             setattr(self, target, value//value2)
         else:
             raise ValueError(RegisterError%str(target))
@@ -243,6 +373,8 @@ class ExaBot:
         :raises ValueError: When target isn't a defined register
         """
         if self.is_register(target):
+            value = self.get_value(value)
+            value2 = self.get_value(value2)
             setattr(self, target, value%value2)
         else:
             raise ValueError(RegisterError%str(target))
@@ -303,14 +435,6 @@ class ExaBot:
         if exaCommand.Action in self.operations:
             operation = self.operations[exaCommand.Action]
             conditions = exaCommand.Arguments
-            for i, reg_or_num in enumerate(conditions[:-1]):
-                if self.is_register(reg_or_num):
-                    conditions[i] = self.get_register_value(reg_or_num)
-                elif type(reg_or_num) == int:
-                    conditions[i] = reg_or_num
-                else:
-                    raise ValueError("Passed value(%s) is invalid, must be a register or int."%(reg_or_num))
-
             operation(*conditions)
             if debug:
                 self.show_registers()
