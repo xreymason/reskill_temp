@@ -66,6 +66,8 @@ class ExaCommand:
         for i, value in enumerate(tmp):
             if value.strip('-').isdigit():
                 tmp[i] = int(value)
+            elif len(value) != 1:
+                raise ValueError("invalid value: %s"%(value))
         return tmp
     @Arguments.setter
     def Arguments(self,value:list):
@@ -140,115 +142,8 @@ class ExaBot:
         for reg in ('X','T','F'):
             print("%s: %s"%(reg, self.get_register_value(reg)),end=",")
         print()
-
-
-    # def _copy(self, value:int, target:str):
-    #     """Performs a Copy operation on the value
-    #     then stores it in the target register
-
-    #     :param value: a number
-    #     :type value: int
-    #     :param target: a register to store result in
-    #     :type target: str
-    #     :raises ValueError: When target isn't a defined register
-    #     """
-    #     if self.is_register(target):
-    #         setattr(self, target, value)
-    #     else:
-    #         raise ValueError(RegisterError%str(target))
-
-
-    # def _addi(self, value:int, value2:int, target:str):
-    #     """Performs a Addition operation on the values
-    #     then stores the result in the target register
-
-    #     :param value: a number
-    #     :type value: int
-    #     :param value2: a number
-    #     :type value2: int
-    #     :param target: a register to store result in
-    #     :type target: str
-    #     :raises ValueError: When target isn't a defined register
-    #     """
-    #     if self.is_register(target):
-    #         setattr(self, target, value+value2)
-    #     else:
-    #         raise ValueError(RegisterError%str(target))
-
-
-    # def _subi(self, value:int, value2:int, target:str):
-    #     """Performs a Subtraction operation on the values
-    #     then stores the result in the target register
-
-    #     :param value: a number
-    #     :type value: int
-    #     :param value2: a number
-    #     :type value2: int
-    #     :param target: a register to store result in
-    #     :type target: str
-    #     :raises ValueError: When target isn't a defined register
-    #     """
-    #     if self.is_register(target):
-    #         setattr(self, target, value-value2)
-    #     else:
-    #         raise ValueError(RegisterError%str(target))
     
 
-    # def _muli(self, value:int, value2:int, target:str):
-    #     """Performs a Multiplication operation on the values
-    #     then stores the result in the target register
-
-    #     :param value: a number
-    #     :type value: int
-    #     :param value2: a number
-    #     :type value2: int
-    #     :param target: a register to store result in
-    #     :type target: str
-    #     :raises ValueError: When target isn't a defined register
-    #     """
-    #     if self.is_register(target):
-    #         setattr(self, target, value*value2)
-    #     else:
-    #         raise ValueError(RegisterError%str(target))
-    
-
-    # def _divi(self, value:int, value2:int, target:str):
-    #     """Performs a Floor Division operation on the values
-    #     then stores the result in the target register
-
-    #     :param value: a number
-    #     :type value: int
-    #     :param value2: a number
-    #     :type value2: int
-    #     :param target: a register to store result in
-    #     :type target: str
-    #     :raises ValueError: When target isn't a defined register
-    #     """
-    #     if self.is_register(target):
-    #         setattr(self, target, value//value2)
-    #     else:
-    #         raise ValueError(RegisterError%str(target))
-    
-
-    # def _modi(self, value:int, value2:int, target:str):
-    #     """Performs a Modulus operation on the values
-    #     then stores the result in the target register
-
-    #     :param value: a number
-    #     :type value: int
-    #     :param value2: a number
-    #     :type value2: int
-    #     :param target: a register to store result in
-    #     :type target: str
-    #     :raises ValueError: When target isn't a defined register
-    #     """
-    #     if self.is_register(target):
-    #         setattr(self, target, value%value2)
-    #     else:
-    #         raise ValueError(RegisterError%str(target))
-
-
-    # New Format
     def get_value(self, reg_or_num) -> int:
         """Either gets a value from a register
 
