@@ -34,3 +34,22 @@ def test_EB_passed_invalid_action():
     bot = ExaBot()
     with pytest.raises(ValueError):
         bot.process_command(ExaCommand("SUPER 4 5 T"))
+
+
+def test_EB_passed_error1_program():
+    bot = ExaBot()
+    with pytest.raises(ValueError):
+        bot.execute_file(r".\tests\error1.exa")
+
+
+def test_EB_passed_error2_program():
+    bot = ExaBot()
+    with pytest.raises(ValueError):
+        bot.execute_file(r".\tests\error2.exa")
+
+
+def test_EB_passed_error3_program():
+    bot = ExaBot()
+    with pytest.raises(ValueError):
+        bot.execute_file(r".\tests\error3.exa")
+
