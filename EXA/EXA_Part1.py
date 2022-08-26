@@ -25,71 +25,10 @@ Needs-
     * Method to process a file of commands
     * Method to execute a file of commands
 """
-
-
-class ExaCommand:
-    """Object to store and convert Exa command strings 
-    to more usable formats
-    """
-    def __init__(self, command:str):
-        if type(command) == str:
-            self.command = command
-        else:
-            raise TypeError("Invalid Command, must be of type str")
-
-    @property
-    def Action(self)->str:
-        """Getter for action to use other values in
-        
-        :rtype: str
-        """
-        return self.command.split()[0]
-    @Action.setter
-    def Action(self,value:str):
-        """Setter for action to use other values in
-        
-        :param value: command action to use
-        :type value: str)
-        """
-        tmp = self.command.split()
-        tmp[0] = str(value)
-        self.command = " ".join(tmp)
-    
-
-    @property
-    def Arguments(self)->list:
-        """Getter for arguments to use in action
-        
-        :rtype: list
-        """
-        tmp = self.command.split()[1:]
-        for i, value in enumerate(tmp):
-            if value.strip('-').isdigit():
-                tmp[i] = int(value)
-            elif value.isalpha():
-                pass
-            elif len(value) != 1:
-                raise ValueError("invalid value: %s"%(value))
-        return tmp
-    @Arguments.setter
-    def Arguments(self,value:list):
-        """Setter for arguments to use in action
-        
-        :param value: all arguments for the desired action
-        :type value: list)
-        """
-        value = [str(v) for v in value]
-        tmp = self.command.split()
-        self.command = tmp[0] + " " + " ".join(value)
-    
-
-    def command_structure(self) -> tuple:
-        """Formats the command in a easier to use structure
-
-        :return: Action: Arguments structure
-        :rtype: tuple
-        """
-        return self.Action, self.Arguments
+import sys, os
+parent_dir = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(parent_dir)
+from EXA import ExaCommand
 
 
 RegisterError = "Target(%s) is not a valid Register"
@@ -339,42 +278,7 @@ class ExaBot:
             raise ValueError("%s is an invalid command"%(exaCommand.Action))
 
 
-    def process_file(self, file_path:str) -> list:
-        """Converts each line in a file to an ExaCommand object
-
-        :param file_path: Absolute File Path to .exa file
-        :type file_path: str
-        :return: all commands as ExaCommand objects
-        :rtype: list
-        """
-        commands = []
-        with open(file_path, 'r') as file:
-            for line in file:
-                line = line.strip()
-                if len(line.split()) > 1:
-                    commands.append(ExaCommand(line))
-        return commands
-
-
-    def execute_file(self, file_path:str, debug=False):
-        """Performs all commands in the passed file
-
-        :param file_path: Absolute File Path to .exa file
-        :type file_path: str
-        :param debug: show commands as performed, defaults to False
-        :type debug: bool, optional
-        """
-        commands = self.process_file(file_path)
-        for command in commands:
-            if debug:
-                print(ExaCommand.command_structure(command))
-            self.process_command(command, debug)
-
-
 if __name__ == "__main__":
     bot1 = ExaBot()
-    # bot1.execute_file(r"C:\Users\mdupont\Downloads\reskill_temp\EXA\program1.exa", debug=True)
-    bot1.execute_file(r"C:\Users\mdupont\Downloads\reskill_temp\EXA\program2.exa", debug=True)
-    # commands = bot1.process_file(r"C:\Users\mdupont\Downloads\reskill_temp\program1.exa")
-    # for command in commands:
-    #     print(command.command_structure())
+    bot1.process_command(ExaCommand("ADDI 4 5 X"), debug=True)
+    bot1.show_registers()
