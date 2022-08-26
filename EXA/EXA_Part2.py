@@ -15,23 +15,51 @@ from EXA.EXA_Part1 import ExaBot, ExaCommand
 
 
 class ExaBot2(ExaBot):
-    def _test(self, value:int, comparitor:str, value2:int):
+    @property
+    def _operators(self):
+        """Easy to use lookup table for different test methods
+        Note: Did this to limit user to only these methods
+
+        :return: Conditional methods
+        :rtype: dict
+        """
         from operator import eq, gt, lt
         comparitors = {
             "=": eq,
             ">": gt,
             "<": lt
         }
-        if comparitor not in comparitors:
-            raise ValueError("Invalid comparitor, must be in: %s"%comparitors.keys())
+        return comparitors
+
+
+    def _test(self, value:int, comparitor:str, value2:int):
+        """Checks if a condition is True or False
+
+        :param value: number to compare to value2
+        :type value: int
+        :param comparitor: operator
+        :type comparitor: str
+        :param value2: number to compare to value
+        :type value2: int
+        :raises ValueError: When comparitor isn't one of the defined ones
+        """
+        if comparitor not in self._operators:
+            raise ValueError("Invalid comparitor, must be in: %s"%self._operators.keys())
 
         value = self.get_value(value)
         value2 = self.get_value(value2)
-        self.T = 1 if comparitors[comparitor](value,value2) else 0
+        self.T = 1 if self._operators[comparitor](value,value2) else 0
 
 
     @property
     def operations(self) -> dict:
+        """Easy to use lookup table for different commands
+        Updated Operation dictionary:
+        'TEST'
+
+        :return: All operations available in a single lookup table
+        :rtype: dict
+        """
         ops = super().operations
         ops.update({'TEST':self._test})
         return ops
