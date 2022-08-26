@@ -38,7 +38,6 @@ class ExaBot:
     def __init__(self):
         self.X = 0
         self.T = 0
-        self.F = 0
 
 
     @property
@@ -80,8 +79,8 @@ class ExaBot:
     def show_registers(self):
         """Prints out all the register values
         """
-        for reg in ('X','T','F'):
-            print("%s: %s"%(reg, self.get_register_value(reg)),end=",")
+        for reg in ('X','T'):
+            print("%s: %s"%(reg, self.get_register_value(reg)),end=",\t")
         print()
     
 
