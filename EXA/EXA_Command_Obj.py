@@ -38,10 +38,10 @@ class ExaCommand:
         for i, value in enumerate(tmp):
             if value.strip('-').isdigit():
                 tmp[i] = int(value)
-            elif value.isalpha():
-                pass
-            elif len(value) != 1:
-                raise ValueError("invalid value: %s"%(value))
+            # elif value.isalpha():
+            #     pass
+            # elif len(value) != 1:
+            #     raise ValueError("invalid value: %s"%(value))
         return tmp
     @Arguments.setter
     def Arguments(self,value:list):
