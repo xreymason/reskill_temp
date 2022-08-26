@@ -33,6 +33,12 @@ def execute_file(file_path:str, bot:ExaBot, debug=False):
         """
         commands = process_file(file_path)
         bot.command_ptr = 0
+        for command in commands:
+            if command.Action == 'MARK':
+                bot.process_command(command)
+            bot.command_ptr +=1
+
+        bot.command_ptr = 0
         while bot.command_ptr < len(commands):
             command = commands[bot.command_ptr]
             if debug:
@@ -42,7 +48,7 @@ def execute_file(file_path:str, bot:ExaBot, debug=False):
 
 
 if __name__ == "__main__":
-    from EXA import ExaBot2, ExaBot3
+    from EXA import ExaBot2, ExaBot3, ExaBot4, file_system
 
     print("Basic Bot V1 Program2")
     bot1 = ExaBot()
@@ -55,3 +61,8 @@ if __name__ == "__main__":
     print("\nBot V3 Program4")
     bot3 = ExaBot3()
     execute_file(r"C:\Users\mdupont\Downloads\reskill_temp\EXA\program4.exa", bot3, debug=True)
+
+    print("\nBot V4 Program5")
+    bot4 = ExaBot4()
+    execute_file(r"C:\Users\mdupont\Downloads\reskill_temp\EXA\program5.exa", bot4, debug=True)
+    print(file_system.files[400])#[] is not correct, its supposed to be primes below 50
