@@ -46,10 +46,22 @@ class ExaBot3(ExaBot2):
     
 
     def _mark(self, label:str):
+        """Stores a pointer index with a name
+
+        :param label: name of index to store
+        :type label: str
+        """
         self._labels.update({label:self.command_ptr})
 
     
     def _jump(self, label:str):
+        """Changes pointer value to the location stored in the
+        label.
+
+        :param label: Name of marked location in program
+        :type label: str
+        :raises ValueError: A mark operation hasn't created the label before hand
+        """
         if label in self._labels:
             self.command_ptr = self._labels[label]
         else:
@@ -57,17 +69,34 @@ class ExaBot3(ExaBot2):
 
     
     def _tjmp(self, label:str):
+        """Performs JUMP operation if Register T isn't 0
+
+        :param label: Name of marked location in program
+        :type label: str
+        """
         if self.T != 0:
             self._jump(label)
 
 
     def _fjmp(self, label:str):
+        """Performs JUMP operation if Register T is 0
+
+        :param label: Name of marked location in program
+        :type label: str
+        """
         if self.T == 0:
             self._jump(label)
 
 
     @property
     def operations(self) -> dict:
+        """Easy to use lookup table for different commands
+        Updated Operation dictionary:
+        'MARK', 'JUMP', 'TJMP', 'FJMP'
+
+        :return: All operations available in a single lookup table
+        :rtype: dict
+        """
         ops = super().operations
         new_ops = {
             'MARK':self._mark,
