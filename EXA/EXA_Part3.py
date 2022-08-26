@@ -79,25 +79,20 @@ class ExaBot3(ExaBot2):
         return ops
 
 
-    def execute_file(self, file_path:str, debug=False):
-        """Performs all commands in the passed file
-
-        :param file_path: Absolute File Path to .exa file
-        :type file_path: str
-        :param debug: show commands as performed, defaults to False
-        :type debug: bool, optional
-        """
-        commands = self.process_file(file_path)
-        self.command_ptr = 0
-        while self.command_ptr < len(commands):
-            command = commands[self.command_ptr]
-            if debug:
-                print(ExaCommand.command_structure(command))
-            self.process_command(command, debug)
-            self.command_ptr +=1
-
-
 if __name__ == "__main__":
-    bot1 = ExaBot3()
-    # bot1.execute_file(r"C:\Users\mdupont\Downloads\reskill_temp\EXA\program1.exa", debug=True)
-    bot1.execute_file(r"C:\Users\mdupont\Downloads\reskill_temp\EXA\program4.exa", debug=True)
+    bot3 = ExaBot3()
+    commands = [
+        "COPY 7 T",
+        "COPY 1 X",
+        "MARK LOOP",
+        "MULI X T X",
+        "SUBI T 1 T",
+        "TJMP LOOP"
+    ]
+
+    bot3.command_ptr = 0
+    while bot3.command_ptr < len(commands):
+        command = commands[bot3.command_ptr]
+        print(ExaCommand(command).command_structure())
+        bot3.process_command(ExaCommand(command), debug=True)
+        bot3.command_ptr +=1

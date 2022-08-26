@@ -39,5 +39,6 @@ class ExaBot2(ExaBot):
 
 if __name__ == "__main__":
     bot = ExaBot2()
-    # bot.process_command(ExaCommand("TEST 4 < 5"), debug=True)
-    bot.execute_file(r"C:\Users\mdupont\Downloads\reskill_temp\EXA\program3.exa", debug=True)
+    command = "TEST 4 < 5"
+    print(ExaCommand(command).command_structure())
+    bot.process_command(ExaCommand(command), debug=True)

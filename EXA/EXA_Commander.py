@@ -21,18 +21,24 @@ def process_file(file_path:str) -> list:
 
 
 def execute_file(file_path:str, bot:ExaBot, debug=False):
-    """Performs all commands in the passed file
+        """Give each command in the passed file one at a
+        time to an ExaBot to perform
 
-    :param file_path: Absolute File Path to .exa file
-    :type file_path: str
-    :param debug: show commands as performed, defaults to False
-    :type debug: bool, optional
-    """
-    commands = bot.process_file(file_path)
-    for command in commands:
-        if debug:
-            print(ExaCommand.command_structure(command))
-        bot.process_command(command, debug)
+        :param file_path: Absolute File Path to .exa file
+        :type file_path: str
+        :param bot: An instance of ExaBot object
+        :type bot: ExaBot
+        :param debug: show commands as performed, defaults to False
+        :type debug: bool, optional
+        """
+        commands = process_file(file_path)
+        bot.command_ptr = 0
+        while bot.command_ptr < len(commands):
+            command = commands[bot.command_ptr]
+            if debug:
+                print(ExaCommand.command_structure(command))
+            bot.process_command(command, debug)
+            bot.command_ptr +=1
 
 
 if __name__ == "__main__":

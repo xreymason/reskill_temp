@@ -280,5 +280,6 @@ class ExaBot:
 
 if __name__ == "__main__":
     bot1 = ExaBot()
-    bot1.process_command(ExaCommand("ADDI 4 5 X"), debug=True)
-    bot1.show_registers()
+    command = "ADDI 4 5 X"
+    print(ExaCommand(command).command_structure())
+    bot1.process_command(ExaCommand(command), debug=True)
