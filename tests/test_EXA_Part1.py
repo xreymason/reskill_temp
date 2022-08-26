@@ -1,4 +1,4 @@
-from ..EXA.EXA_Part1 import ExaCommand, ExaBot
+from ..EXA import ExaCommand, ExaBot
 import pytest
 
 
@@ -35,21 +35,22 @@ def test_EB_passed_invalid_action():
     with pytest.raises(ValueError):
         bot.process_command(ExaCommand("SUPER 4 5 T"))
 
+## Invalidated due to moving the execute_file method from bot to EXA_Commander.py
 
-def test_EB_passed_error1_program():
-    bot = ExaBot()
-    with pytest.raises(ValueError):
-        bot.execute_file(r".\tests\error1.exa")
-
-
-def test_EB_passed_error2_program():
-    bot = ExaBot()
-    with pytest.raises(ValueError):
-        bot.execute_file(r".\tests\error2.exa")
+# def test_EB_passed_error1_program():
+#     bot = ExaBot()
+#     with pytest.raises(ValueError):
+#         bot.execute_file(r".\tests\error1.exa")
 
 
-def test_EB_passed_error3_program():
-    bot = ExaBot()
-    with pytest.raises(ValueError):
-        bot.execute_file(r".\tests\error3.exa")
+# def test_EB_passed_error2_program():
+#     bot = ExaBot()
+#     with pytest.raises(ValueError):
+#         bot.execute_file(r".\tests\error2.exa")
+
+
+# def test_EB_passed_error3_program():
+#     bot = ExaBot()
+#     with pytest.raises(ValueError):
+#         bot.execute_file(r".\tests\error3.exa")
 

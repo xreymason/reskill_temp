@@ -1,4 +1,4 @@
-from ..EXA.EXA_Part2 import ExaBot2, ExaCommand
+from ..EXA import ExaBot2, ExaCommand
 import pytest
 
 
