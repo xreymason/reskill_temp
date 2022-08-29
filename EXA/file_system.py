@@ -56,12 +56,6 @@ def get_file_length(file_id:int) -> int:
     return len(_get_file(file_id))
 
 
-def create_file(file_id:int):
-    if _file_exists(str(file_id)):
-        raise FileExistsError()
-    files.update({str(file_id):[]})
-
-
 def read_file_line(file_id:int, line_number:int) -> int:
     file = _get_file(file_id)
     line_number = _valid_line_number(file_id, line_number)
@@ -69,12 +63,14 @@ def read_file_line(file_id:int, line_number:int) -> int:
 
 
 def write_file_line(file_id:int, line_number:int, new_value:int):
-    file = _get_file(file_id)
+    # file = _get_file(file_id)
     line_number = _valid_line_number(file_id, line_number)
-    if line_number < get_file_length(file_id):
-        file[line_number] = new_value
-    else:
-        file.append(new_value)    
+    # file.append(new_value)
+    files[file_id].append(new_value)
+    # if line_number < get_file_length(file_id):
+    #     file[line_number] = new_value
+    # else:
+    #     file.append(new_value)
 
 
 def delete_file_line(file_id:int, line_number:int):
